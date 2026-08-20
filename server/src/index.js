@@ -1,3 +1,3 @@
-const PORT = process.env.PORT || 3000;
+import env from './config/env.js';
 
-console.log(`Portfolio Platform server running on port ${PORT}`);
+console.log(`Portfolio Platform server running on port ${env.port}`);
