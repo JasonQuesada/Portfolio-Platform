@@ -1,0 +1,34 @@
+{
+  "name": "portfolio-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reusable full-stack portfolio platform and template built with React, JavaScript, Node.js, and Firebase, featuring an integrated admin dashboard and CMS.",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=client",
+    "build": "npm run build --workspace=client",
+    "preview": "npm run preview --workspace=client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonQuesada/Portfolio-Platform.git"
+  },
+  "keywords": [
+    "react",
+    "vite",
+    "node.js",
+    "firebase",
+    "portfolio",
+    "cms"
+  ],
+  "author": "Jason Quesada",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/JasonQuesada/Portfolio-Platform/issues"
+  },
+  "homepage": "https://github.com/JasonQuesada/Portfolio-Platform#readme"
+}
