@@ -22,6 +22,18 @@ const saveGoogleDriveCredentials = async (tokens) => {
   );
 };
 
+const saveGoogleDriveFolders = async (folders) => {
+  const document = getCredentialsDocument();
+
+  await document.set(
+    {
+      folders,
+      updatedAt: new Date(),
+    },
+    { merge: true },
+  );
+};
+
 const getGoogleDriveCredentials = async () => {
   const document = getCredentialsDocument();
   const snapshot = await document.get();
@@ -35,5 +47,6 @@ const getGoogleDriveCredentials = async () => {
 
 export {
   saveGoogleDriveCredentials,
+  saveGoogleDriveFolders,
   getGoogleDriveCredentials,
 };

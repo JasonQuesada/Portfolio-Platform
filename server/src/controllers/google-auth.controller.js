@@ -5,7 +5,12 @@ import {
 
 import {
   saveGoogleDriveCredentials,
+  saveGoogleDriveFolders,
 } from '../services/google-drive-credentials.service.js';
+
+import {
+  initializeGoogleDriveFolders,
+} from '../services/google-drive-folders.service.js';
 
 const startGoogleAuthorization = (req, res) => {
   const authorizationUrl = createAuthorizationUrl();
@@ -31,7 +36,19 @@ const handleGoogleCallback = async (req, res) => {
   });
 };
 
+const initializeGoogleDrive = async (req, res) => {
+  const folders = await initializeGoogleDriveFolders();
+
+  await saveGoogleDriveFolders(folders);
+
+  res.json({
+    message: 'Google Drive folders initialized successfully',
+    folders,
+  });
+};
+
 export {
   startGoogleAuthorization,
   handleGoogleCallback,
+  initializeGoogleDrive,
 };
