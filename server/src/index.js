@@ -1,4 +1,6 @@
 import express from 'express';
+
+import './config/firebase.js';
 import env from './config/env.js';
 import healthRoutes from './routes/health.routes.js';
 
