@@ -8,6 +8,7 @@ const createOAuthClient = () =>
   new google.auth.OAuth2(
     env.google.clientId,
     env.google.clientSecret,
+    env.google.redirectUri,
   );
 
 const createAuthorizationUrl = () => {
