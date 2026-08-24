@@ -88,6 +88,32 @@ const initializeGoogleDriveFolders = async () => {
   };
 };
 
+const createExperienceFolder = async (experienceName) => {
+  const drive = await createAuthenticatedDriveClient();
+
+  const folders = await initializeGoogleDriveFolders();
+
+  return findOrCreateFolder(
+    drive,
+    experienceName,
+    folders.experiencesId,
+  );
+};
+
+const createProjectFolder = async (projectName) => {
+  const drive = await createAuthenticatedDriveClient();
+
+  const folders = await initializeGoogleDriveFolders();
+
+  return findOrCreateFolder(
+    drive,
+    projectName,
+    folders.projectsId,
+  );
+};
+
 export {
   initializeGoogleDriveFolders,
+  createExperienceFolder,
+  createProjectFolder,
 };
