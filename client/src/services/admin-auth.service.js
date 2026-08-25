@@ -7,7 +7,7 @@ const getCurrentAdmin = async () => {
     return null;
   }
 
-  const response = await fetch('/api/admin/auth/me', {
+  const response = await fetch('/api/admin/me', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
