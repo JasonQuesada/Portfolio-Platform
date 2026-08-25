@@ -6,6 +6,7 @@ import experiencesRoutes from './routes/experiences.routes.js';
 import googleAuthRoutes from './routes/google-auth.routes.js';
 import healthRoutes from './routes/health.routes.js';
 import projectsRoutes from './routes/projects.routes.js';
+import adminAuthRoutes from './routes/admin-auth.routes.js';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use('/api/health', healthRoutes);
 app.use('/api/auth', googleAuthRoutes);
 app.use('/api/experiences', experiencesRoutes);
 app.use('/api/projects', projectsRoutes);
+app.use('/api/admin', adminAuthRoutes);
 
 app.listen(env.port, () => {
   console.log(`Portfolio Platform server running on port ${env.port}`);
