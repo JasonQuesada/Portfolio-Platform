@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import appConfig from '@/config/app.config';
+import AdminLayout from '@/layouts/AdminLayout';
 import AdminRoute from '@/routes/AdminRoute';
 import AdminDashboardPage from '@/pages/admin/AdminDashboardPage';
 import AdminPage from '@/pages/admin/AdminPage';
@@ -19,12 +20,16 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+
         <Route path="/admin" element={<AdminPage />} />
+
         <Route
           path="/admin/dashboard"
           element={
             <AdminRoute>
-              <AdminDashboardPage />
+              <AdminLayout>
+                <AdminDashboardPage />
+              </AdminLayout>
             </AdminRoute>
           }
         />
