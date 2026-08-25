@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-
 import { useAuth } from '@/context/AuthContext';
-import { getCurrentAdmin } from '@/services/admin-auth.service';
+import { useAdminAuth } from '@/context/AdminAuthContext';
 
 function AdminPage() {
   const {
@@ -11,61 +9,12 @@ function AdminPage() {
     signOut,
   } = useAuth();
 
-  const [admin, setAdmin] = useState(null);
-  const [authorizationLoading, setAuthorizationLoading] = useState(false);
-  const [authorizationError, setAuthorizationError] = useState(null);
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      setAdmin(null);
-      setAuthorizationError(null);
-      return;
-    }
-
-    let active = true;
-
-    const verifyAdminAccess = async () => {
-      setAuthorizationLoading(true);
-      setAuthorizationError(null);
-
-      try {
-        const result = await getCurrentAdmin();
-
-        if (!active) {
-          return;
-        }
-
-        if (!result?.user) {
-          setAuthorizationError(
-            'You are not authorized to access the admin panel.',
-          );
-          setAdmin(null);
-          return;
-        }
-
-        setAdmin(result);
-      } catch {
-        if (!active) {
-          return;
-        }
-
-        setAuthorizationError(
-          'Unable to verify administrator access.',
-        );
-        setAdmin(null);
-      } finally {
-        if (active) {
-          setAuthorizationLoading(false);
-        }
-      }
-    };
-
-    verifyAdminAccess();
-
-    return () => {
-      active = false;
-    };
-  }, [isAuthenticated]);
+  const {
+    admin,
+    loading: authorizationLoading,
+    error: authorizationError,
+    isAdmin,
+  } = useAdminAuth();
 
   if (authLoading) {
     return <p>Checking authentication...</p>;
@@ -93,7 +42,7 @@ function AdminPage() {
     );
   }
 
-  if (authorizationError || !admin?.user) {
+  if (!isAdmin) {
     return (
       <main>
         <h1>Access denied</h1>
@@ -114,7 +63,7 @@ function AdminPage() {
       <h1>Admin</h1>
 
       <p>
-        Signed in as <strong>{admin.user.email}</strong>
+        Signed in as <strong>{admin.email}</strong>
       </p>
 
       <button type="button" onClick={signOut}>
