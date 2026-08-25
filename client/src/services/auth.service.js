@@ -27,9 +27,20 @@ const subscribeToAuthState = (callback) => {
 
 const getCurrentUser = () => auth.currentUser;
 
+const getCurrentUserToken = async () => {
+  const user = auth.currentUser;
+
+  if (!user) {
+    return null;
+  }
+
+  return user.getIdToken();
+};
+
 export {
   signInWithGoogle,
   signOutUser,
   subscribeToAuthState,
   getCurrentUser,
+  getCurrentUserToken,
 };
