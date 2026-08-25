@@ -5,7 +5,6 @@ import { getCurrentAdmin } from '@/services/admin-auth.service';
 
 function AdminPage() {
   const {
-    user,
     loading: authLoading,
     isAuthenticated,
     signIn,
@@ -36,8 +35,10 @@ function AdminPage() {
           return;
         }
 
-        if (!result) {
-          setAuthorizationError('You are not authorized to access the admin panel.');
+        if (!result?.user) {
+          setAuthorizationError(
+            'You are not authorized to access the admin panel.',
+          );
           setAdmin(null);
           return;
         }
@@ -92,11 +93,14 @@ function AdminPage() {
     );
   }
 
-  if (authorizationError) {
+  if (authorizationError || !admin?.user) {
     return (
       <main>
         <h1>Access denied</h1>
-        <p>{authorizationError}</p>
+        <p>
+          {authorizationError ??
+            'You are not authorized to access the admin panel.'}
+        </p>
 
         <button type="button" onClick={signOut}>
           Sign out
